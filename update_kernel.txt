@@ -1,0 +1,4 @@
+обновление ядра выполнено при помощи пакетов
+  скачено 4 файла с ресурса https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.5/
+  выполнил: dpkg -i linux-headers* linux-image* linux-modules*
+  затем: update-grub
