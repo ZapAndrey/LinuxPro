@@ -1,0 +1,33 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby : vsa
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "centos7"
+  #config.vm.box_version = "4.2.16"
+  #config.vm.synced_folder ".", "/vagrant/ubuntu/"
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = 1024
+    vb.cpus = 2
+    config.vm.provision "shell", inline: <<-SHELL
+      yum update
+      yum install -y \
+      redhat-lsb-core \
+      wget \
+      rpmdevtools \
+      rpm-build \
+      createrepo \
+      yum-utils \
+      vim \
+      gcc
+      sudo setenforce 0
+      ## srpm nginx
+      #sudo wget https://nginx.org/packages/centos/8/SRPMS/nginx-1.20.2-1.el8.ngx.src.rpm
+      #sudo rpm -i nginx-1.*
+      ##openssl
+      #sudo wget https://github.com/openssl/openssl/archive/refs/heads/OpenSSL_1_1_1-stable.zip
+      #sudo tar -xvf latest.tar.gz
+      #sudo yum-builddep rpmbuild/SPECS/nginx.spec
+
+SHELL
+  end
+end
